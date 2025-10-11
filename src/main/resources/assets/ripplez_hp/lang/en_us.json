@@ -1,5 +1,10 @@
 {
   "stand.ripplez_hp.hermit_purple": "Hermit Purple",
+  "stand.ripplez_hp.emperor": "Emperor",
+
+  "item.ripplez_hp.emperor": "Emperor",
+
+  "entity.ripplez_hp.emperor_bullet": "Emperor Bullet",
 
   "jojo_ripples.skill.cringe": "Oh no Cringe!",
   "jojo_ripples.ability.cringe": "\"Oh no, Cringe!\"",
@@ -15,6 +20,20 @@
   "jojo_ripples.ability.hp_block": "Hermito Thorns",
   "jojo_ripples.skill.hp_block.desc": "Holding it protects you from any damage that isn't a projectile",
 
+  "jojo_ripples.skill.emp_target": "Change Target Type",
+  "jojo_ripples.ability.emp_target": "Current Target: %s",
+  "jojo_ripples.ability.emp_d_target": "Current Target: %s",
+  "jojo_ripples.skill.emp_target.desc": "Cycle through the target emperor generic target types",
+  "jojo_ripples.skill.emp_target.controls": "Click to change target type",
+  "jojo_ripples.skill.emp_stand_target": "Set Particular Target",
+  "jojo_ripples.ability.emp_stand_target": "Set Particular Target",
+  "jojo_ripples.skill.emp_stand_target.desc": "Turn the entity you see into the Emperor's target",
+  "jojo_ripples.skill.emp_stand_target.controls": "Click to target the entity on sight",
+  "jojo_ripples.skill.emp_delete_target": "Delete Particular Target",
+  "jojo_ripples.ability.emp_delete_target": "Delete Particular Target",
+  "jojo_ripples.skill.emp_delete_target.desc": "Delete the Emperor's target entity",
+  "jojo_ripples.skill.emp_delete_target.controls": "Click to delete the target",
+
   "filled_map.divination": "Spirit divination of %s",
 
   "gui.hermitpurpletarget.title": "Hermit Purple target select",
@@ -28,5 +47,10 @@
 
   "commands.hermit.target.failed": "Unable to set the target",
   "commands.hermit.target.succes": "%s was set as %s target",
-  "commands.hermit.target.random": "Random"
+  "commands.hermit.target.random": "Random",
+
+  "ripplez_hp.type.random": "Random",
+  "ripplez_hp.type.players": "Players",
+  "ripplez_hp.type.hostile": "Hostile mobs",
+  "ripplez_hp.type.non": "Just a Gun, I wish you are happy"
 }

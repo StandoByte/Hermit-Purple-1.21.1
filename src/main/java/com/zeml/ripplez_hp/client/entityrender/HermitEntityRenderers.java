@@ -3,6 +3,8 @@ package com.zeml.ripplez_hp.client.entityrender;
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.client.entityrender.hermit.HermitPurpleLayer;
 import com.zeml.ripplez_hp.client.entityrender.hermit.HermitPurpleOuterLayer;
+import com.zeml.ripplez_hp.init.AddonEntityTypes;
+import com.zeml.ripplez_hp.jojoimpl.stands.emperor.client.EmperorBulletRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -16,6 +18,12 @@ import static com.github.standobyte.jojo.client.entityrender.ModEntityRenderers.
 
 @EventBusSubscriber(modid = HermitPurpleAddon.MOD_ID, value = Dist.CLIENT)
 public class HermitEntityRenderers {
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event){
+        event.registerEntityRenderer(AddonEntityTypes.EMPEROR_BULLET.get(), EmperorBulletRenderer::new);
+    }
+
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {

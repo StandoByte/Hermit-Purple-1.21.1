@@ -2,13 +2,16 @@ package com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple;
 
 import com.github.standobyte.jojo.client.ClientGlobals;
 import com.github.standobyte.jojo.client.sound.ClientsideSoundsHelper;
+import com.github.standobyte.jojo.client.sound.sounds.EntityLingeringSoundInstance;
 import com.github.standobyte.jojo.powersystem.Power;
 import com.github.standobyte.jojo.powersystem.ability.AbilityId;
 import com.github.standobyte.jojo.powersystem.ability.AbilityType;
+import com.github.standobyte.jojo.powersystem.ability.EntityActionAbility;
 import com.github.standobyte.jojo.powersystem.ability.condition.ConditionCheck;
 import com.github.standobyte.jojo.powersystem.ability.controls.InputMethod;
 import com.github.standobyte.jojo.powersystem.entityaction.ActionPhase;
 import com.github.standobyte.jojo.powersystem.entityaction.HeldInput;
+import com.github.standobyte.jojo.powersystem.standpower.StandPower;
 import com.github.standobyte.jojo.powersystem.standpower.entity.StandEntityAbility;
 import com.mojang.datafixers.util.Pair;
 import com.zeml.ripplez_hp.core.HermitPackets;
@@ -34,7 +37,7 @@ import net.minecraft.world.level.saveddata.maps.MapDecorationType;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
-public class MapDoxingAbility extends StandEntityAbility {
+public class MapDoxingAbility extends EntityActionAbility {
     public MapDoxingAbility(AbilityType<?> abilityType, AbilityId abilityId) {
         super(abilityType, abilityId);
         setDefaultPhaseLength(ActionPhase.WINDUP,5);
@@ -100,9 +103,13 @@ public class MapDoxingAbility extends StandEntityAbility {
                     user.setItemInHand(InteractionHand.MAIN_HAND,map);
                 }else {
                     if(ClientGlobals.canHearStands){
-                        ClientsideSoundsHelper.playEntityLingeringSound(user,AddonSoundEvents.SUMMON_HP.get(),user.getSoundSource(),1F,1F,level);
+                        EntityLingeringSoundInstance sound = new EntityLingeringSoundInstance(ClientsideSoundsHelper
+                                .withStandSkin(AddonSoundEvents.SUMMON_HP.get(), StandPower.get(user)),user.getSoundSource(),1,1f,user,level);
+                        ClientsideSoundsHelper.playNonVanillaClassSound(sound);
                     }
-                    ClientsideSoundsHelper.playEntityLingeringSound(user,AddonSoundEvents.USER_HP.get(),user.getSoundSource(),1F,1F,level);
+                    EntityLingeringSoundInstance sound = new EntityLingeringSoundInstance(ClientsideSoundsHelper
+                            .withStandSkin(AddonSoundEvents.USER_HP.get(), StandPower.get(user)),user.getSoundSource(),1,1f,user,level);
+                    ClientsideSoundsHelper.playNonVanillaClassSound(sound);
 
                 }
             }

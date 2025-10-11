@@ -10,6 +10,7 @@ import com.github.standobyte.jojo.powersystem.standpower.entity.EntityStandType;
 import com.github.standobyte.jojo.powersystem.standpower.type.StandType;
 
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
+import com.zeml.ripplez_hp.powersystem.standpower.type.EmperorType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -18,7 +19,7 @@ public class AddonStands {
 	
 	public static final DeferredHolder<StandType, StandType> HERMIT_PURPLE = STANDS.register(
 			"hermit_purple", id ->
-			new EntityStandType(
+			new StandType(
 					new StandStats.Builder()
 					.power(6)
 					.speed(10)
@@ -53,4 +54,36 @@ public class AddonStands {
 
 
 					, id));
+
+	public static final DeferredHolder<StandType, EmperorType> EMPEROR = STANDS.register(
+			"emperor", id ->
+					new EmperorType(
+							new StandStats.Builder()
+									.power(12)
+									.speed(12)
+									.range(12, 12)
+									.durability(8)
+									.precision(2)
+									.build(),
+
+							new MovesetBuilder()
+
+									.makeHotbar(0, InputKey.X, InputKey.C)
+
+									.addAbility("emp_target", AddonStandAbilities.EMP_TARGET)
+									.inHotbar(0, InputMethod.CLICK)
+									.addAbility("emp_d_target",AddonStandAbilities.EMP_D_TARGET)
+									.inHotbarSlotVariation("emp_target", InputKey.Modifier.CONTROL,InputMethod.CLICK)
+
+									.addAbility("emp_stand_target",AddonStandAbilities.EMP_STAND_TARGET)
+									.inHotbar(0,InputMethod.CLICK)
+									.addAbility("emp_delete_target",AddonStandAbilities.EMP_DELETE_TARGET)
+									.inHotbar(0,InputMethod.CLICK)
+
+									.addSkill(StandUnlockableSkill.startingAbility("emp_target"))
+									.addSkill(StandUnlockableSkill.unlockableAbility("emp_stand_target",3))
+									.addSkill(StandUnlockableSkill.unlockableAbility("emp_delete_target",0).prerequisiteSkill("emp_stand_target"))
+
+
+							, id));
 }

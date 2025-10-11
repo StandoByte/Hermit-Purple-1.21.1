@@ -30,6 +30,7 @@ public class HermitPurpleAddon {
         AddonDataAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         AddonItems.ITEMS.register(modEventBus);
         AddonSoundEvents.SOUNDS.register(modEventBus);
+        HermitDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
     }
 
     @SubscribeEvent

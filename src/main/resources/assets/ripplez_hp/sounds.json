@@ -18,6 +18,11 @@
     "subtitle": "ripplez_hp.subtitle.unsummon_hermit",
     "sounds": [ "ripplez_hp:hermit_purple/unsummon_1" ]
 
+  },
+
+  "emp_shot": {
+    "subtitle": "ripplez_hp.subtitle.emp_shot",
+    "sounds": ["ripplez_hp:emperor/shot_1","ripplez_hp:emperor/shot_2"]
   }
 
 }

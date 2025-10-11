@@ -2,6 +2,7 @@ package com.zeml.ripplez_hp.init;
 
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 
+import com.zeml.ripplez_hp.mc.item.component.EmperorGunData;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;

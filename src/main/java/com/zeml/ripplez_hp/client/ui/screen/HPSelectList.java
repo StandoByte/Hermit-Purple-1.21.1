@@ -12,6 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 public class HPSelectList extends ContainerObjectSelectionList<HPSelectList.HermitEntry> {
@@ -25,12 +26,19 @@ public class HPSelectList extends ContainerObjectSelectionList<HPSelectList.Herm
 
     }
 
+
+
     public void updateList(Collection<?> newList){
         this.clearEntries();
         this.originalList = new ArrayList<>(newList);
         newList.forEach(item ->this.addEntry(new HermitEntry(item)));
     }
 
+    private void updateFilteredEntries(){
+        if (!Objects.equals(this.filterText, "")){
+
+        }
+    }
 
     public void setFilter(String filter) {
         this.filterText = filter.toLowerCase();
@@ -42,9 +50,10 @@ public class HPSelectList extends ContainerObjectSelectionList<HPSelectList.Herm
     }
 
 
+    @Override
+    protected void renderListBackground(GuiGraphics guiGraphics) {
 
-
-
+    }
 
     @OnlyIn(Dist.CLIENT)
     public class HermitEntry extends ContainerObjectSelectionList.Entry<HermitEntry>{

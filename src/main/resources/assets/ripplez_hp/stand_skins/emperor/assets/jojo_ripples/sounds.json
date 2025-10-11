@@ -1,0 +1,17 @@
+{
+  "stand_summon": {
+    "replace": true,
+    "sounds": [
+      "ripplez_hp:emperor/summon",
+      "ripplez_hp:emperor/summon_3"
+    ]
+  },
+  "stand_unsummon": {
+    "replace": true,
+    "sounds": [ "ripplez_hp:emperor/unsummon" ]
+  },
+  "emp_shot": {
+    "replace": true,
+    "sounds": ["ripplez_hp:emperor/shot_1","ripplez_hp:emperor/shot_2"]
+  }
+}

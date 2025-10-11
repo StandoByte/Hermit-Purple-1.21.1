@@ -1,6 +1,7 @@
 package com.zeml.ripplez_hp.init;
 
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
+import com.zeml.ripplez_hp.mc.item.EmperorItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -14,12 +15,12 @@ import static com.github.standobyte.jojo.init.ModItems.MAIN_TAB;
 public final class AddonItems {
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(HermitPurpleAddon.MOD_ID);
 
-	public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerItem("example_item", Item::new, new Item.Properties());
+	public static final DeferredItem<Item> EMPEROR = ITEMS.registerItem("emperor", EmperorItem::new, new Item.Properties().stacksTo(1));
 
     @SubscribeEvent
     public static void addToTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == MAIN_TAB.getKey()) {
-            event.accept(EXAMPLE_ITEM);
+
         }
     }
 }

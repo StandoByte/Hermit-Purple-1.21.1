@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.CommonComponents;
@@ -20,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -161,8 +163,9 @@ public class HPScreenTargetSelect extends Screen {
                     collection = minecraft.level.registryAccess().registryOrThrow(JojoRegistries.DEFAULT_STANDS_REG.key()).keySet();
                     break;
                 case STRUCTURES:
-                    this.standsButton.setMessage(TAB_STANDS_SELECTED);
-                    collection = minecraft.level.registryAccess().registryOrThrow(Registries.STRUCTURE).keySet();
+                    this.standsButton.setMessage(TAB_STRUCTURES_SELECTED);
+                    Registry<Structure> structures = minecraft.level.registryAccess().registryOrThrow(Registries.STRUCTURE);
+                    collection = structures.stream().toList();
                     break;
                 case ENTITIES:
                     this.entitiesButton.setMessage(TAB_ENTITIES_SELECTED);

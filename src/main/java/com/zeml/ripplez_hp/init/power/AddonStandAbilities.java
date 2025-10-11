@@ -4,6 +4,10 @@ import static com.github.standobyte.jojo.core.JojoRegistries.ABILITY_TYPES;
 
 import com.github.standobyte.jojo.powersystem.ability.AbilityType;
 
+import com.zeml.ripplez_hp.jojoimpl.stands.emperor.DeleteStandTargetAbility;
+import com.zeml.ripplez_hp.jojoimpl.stands.emperor.StandTargetAbility;
+import com.zeml.ripplez_hp.jojoimpl.stands.emperor.TargetDSelectAbility;
+import com.zeml.ripplez_hp.jojoimpl.stands.emperor.TargetSelectAbility;
 import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.HermitAction;
 import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.MapDoxingAbility;
 import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.OhNoCringeAbility;
@@ -28,5 +32,20 @@ public final class AddonStandAbilities {
 			"hp_select", key -> new AbilityType<>(key, OpenTargetAbility::new)
 	);
 
+	public static final DeferredHolder<AbilityType<?>, AbilityType<TargetSelectAbility>> EMP_TARGET = ABILITY_TYPES.register(
+			"emp_target", key -> new AbilityType<>(key, TargetSelectAbility::new)
+	);
+
+	public static final DeferredHolder<AbilityType<?>, AbilityType<TargetDSelectAbility>> EMP_D_TARGET = ABILITY_TYPES.register(
+			"emp_d_target", key -> new AbilityType<>(key, TargetDSelectAbility::new)
+	);
+
+	public static final DeferredHolder<AbilityType<?>, AbilityType<StandTargetAbility>> EMP_STAND_TARGET = ABILITY_TYPES.register(
+			"emp_stand_target", key -> new AbilityType<>(key, StandTargetAbility::new)
+	);
+
+	public static final DeferredHolder<AbilityType<?>, AbilityType<DeleteStandTargetAbility>> EMP_DELETE_TARGET = ABILITY_TYPES.register(
+			"emp_delete_target", key -> new AbilityType<>(key, DeleteStandTargetAbility::new)
+	);
 
 }
