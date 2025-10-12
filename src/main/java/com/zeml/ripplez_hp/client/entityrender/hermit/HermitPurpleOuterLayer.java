@@ -45,9 +45,7 @@ public class HermitPurpleOuterLayer<T extends LivingEntity, M extends HumanoidMo
         boolean slim = false;
         ResourceLocation hermit = HERMIT;
         if(t instanceof Player){
-            if(isSlimSkin(((Player) t).getGameProfile())){
-                slim = true;
-            }
+            slim = isSlimSkin(((Player) t).getGameProfile());
         }
         if(StandPower.getOptional(t).isPresent() && StandPower.get(t).getPowerType() == AddonStands.HERMIT_PURPLE.get() && StandPower.get(t).isSummoned()){
             ResourceLocation texture = StandSkinsLoader.getInstance().getSkin(StandPower.get(t)).getTexture(hermit);

@@ -5,11 +5,13 @@ import com.github.standobyte.jojo.core.JojoRegistries;
 import com.github.standobyte.jojo.powersystem.standpower.StandPower;
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.core.packets.client.SetTargetPacket;
+import com.zeml.ripplez_hp.init.AddonDataAttachmentTypes;
 import com.zeml.ripplez_hp.init.power.AddonStands;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.GameNarrator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,7 +23,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -34,7 +35,7 @@ import java.util.Locale;
 @OnlyIn(Dist.CLIENT)
 public class HPScreenTargetSelect extends Screen {
     private static final Component TITLE = Component.translatable("gui.hermitpurpletarget.title");
-    private static final ResourceLocation BACKGROUND_SPRITE = HermitPurpleAddon.resLoc("hp_target");
+    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("social_interactions/background");
     private static final ResourceLocation SEARCH_SPRITE = ResourceLocation.withDefaultNamespace("icon/search");
     private static final Component TAB_PLAYERS = Component.translatable("gui.hermitpurpletarget.tab_players");
     private static final Component TAB_ENTITIES = Component.translatable("gui.hermitpurpletarget.tab_entities");
@@ -61,12 +62,12 @@ public class HPScreenTargetSelect extends Screen {
     HPSelectList hpSelectList;
     private String lastSearch = "";
     private HPScreenTargetSelect.Mode page = Mode.PLAYERS;
-    private HPButton playersButton;
-    private HPButton entitiesButton;
-    private HPButton structuresButton;
-    private HPButton biomesButton;
-    private HPButton standsButton;
-    private HPButton randomButton;
+    private Button playersButton;
+    private Button entitiesButton;
+    private Button structuresButton;
+    private Button biomesButton;
+    private Button standsButton;
+    private Button randomButton;
     EditBox searchBox;
     private int playerCount;
     private boolean initialized;
@@ -106,24 +107,19 @@ public class HPScreenTargetSelect extends Screen {
         int i1 = 64 + 16 * this.backgroundUnits();
         int j = this.hpSelectList.getRowLeft();
         int k = this.hpSelectList.getRowRight();
-        this.playersButton = this.addRenderableWidget(
-                new HPButton(j, 45, i, 20,p_240243_ -> this.showPage(Mode.PLAYERS))
-        );
-        this.entitiesButton = this.addRenderableWidget(
-                new HPButton((j + k - i) / 2 + 1, 45, i, 20,p_240243_ -> this.showPage(Mode.ENTITIES))
-        );
-        this.standsButton = this.addRenderableWidget(
-                new HPButton(k - i + 1, 45, i, 20,p_240243_ -> this.showPage(Mode.STAND))
-        );
-        this.structuresButton =this.addRenderableWidget(
-                new HPButton(j,i1,i,20,p_240243_ -> this.showPage(Mode.STRUCTURES))
-        );
-        this.biomesButton =this.addRenderableWidget(
-                new HPButton(k - i + 1, i1, i, 20,p_240243_ -> this.showPage(Mode.BIOMES))
-        );
-        this.randomButton = this.addRenderableWidget(
-                new HPButton((j + k - i) / 2 + 1, i1, i, 20,p_240243_ -> PacketDistributor.sendToServer(new SetTargetPacket(0,"")))
-        );
+        this.playersButton = (Button) this.addRenderableWidget(Button.builder(TAB_PLAYERS,
+                (onPress)->this.showPage(Mode.PLAYERS)).bounds(j, 45, i, 20).build());
+        this.entitiesButton = (Button) this.addRenderableWidget(Button.builder(TAB_ENTITIES,
+                (onPress)->this.showPage(Mode.ENTITIES)).bounds((j + k - i) / 2 + 1, 45, i, 20).build());
+        this.standsButton = (Button) this.addRenderableWidget(Button.builder(TAB_STANDS,
+                (onPress)->this.showPage(Mode.STAND)).bounds(k - i + 1, 45, i, 20).build());
+        this.structuresButton = (Button) this.addRenderableWidget(Button.builder(TAB_STRUCTURES,
+                (onPress)->this.showPage(Mode.STRUCTURES)).bounds(j,i1,i,20).build());
+        this.biomesButton = (Button) this.addRenderableWidget(Button.builder(TAB_BIOMES,
+                (onPress)->this.showPage(Mode.BIOMES)).bounds(k - i + 1, i1, i, 20).build());
+        this.randomButton = (Button) this.addRenderableWidget(Button.builder(RANDOM,
+                (onPress)->PacketDistributor.sendToServer(new SetTargetPacket(0,""))).bounds((j + k - i) / 2 + 1, i1, i, 20).build());
+
         String s = this.searchBox != null ? this.searchBox.getValue() : "";
         this.searchBox = new EditBox(this.font, this.marginX() + 28, 74, 200, 15, Component.empty()) {
             protected MutableComponent createNarrationMessage() {
@@ -149,31 +145,34 @@ public class HPScreenTargetSelect extends Screen {
         boolean flag = false;
         Collection<?> collection = null;
         if(minecraft.level != null){
-            switch (page){
-                case PLAYERS:
+            switch (page) {
+                case PLAYERS -> {
+                    this.hpSelectList.setMode(1);
                     this.playersButton.setMessage(TAB_PLAYERS_SELECTED);
                     collection = this.minecraft.player.connection.getOnlinePlayerIds();
-                    break;
-                case BIOMES:
+                }
+                case BIOMES -> {
+                    this.hpSelectList.setMode(5);
                     this.biomesButton.setMessage(TAB_BIOMES_SELECTED);
                     collection = minecraft.level.registryAccess().registryOrThrow(Registries.BIOME).keySet();
-                    break;
-                case STAND:
+                }
+                case STAND -> {
+                    this.hpSelectList.setMode(3);
                     this.standsButton.setMessage(TAB_STANDS_SELECTED);
                     collection = minecraft.level.registryAccess().registryOrThrow(JojoRegistries.DEFAULT_STANDS_REG.key()).keySet();
-                    break;
-                case STRUCTURES:
-                    this.standsButton.setMessage(TAB_STRUCTURES_SELECTED);
-                    Registry<Structure> structures = minecraft.level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-                    collection = structures.stream().toList();
-                    break;
-                case ENTITIES:
+                }
+                case STRUCTURES -> {
+                    this.hpSelectList.setMode(4);
+                    this.structuresButton.setMessage(TAB_STRUCTURES_SELECTED);
+                    HermitPurpleAddon.getLogger().debug("Structures {}", minecraft.player.getData(AddonDataAttachmentTypes.HERMIT_DATA).getStructures());
+                    collection = Collections.EMPTY_LIST;
+                }
+                case ENTITIES -> {
+                    this.hpSelectList.setMode(2);
                     this.entitiesButton.setMessage(TAB_ENTITIES_SELECTED);
                     collection = minecraft.level.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).keySet();
-                    break;
-                default:
-                    collection = Collections.EMPTY_LIST;
-                    break;
+                }
+                default -> collection = Collections.EMPTY_LIST;
             }
         }
         HermitPurpleAddon.LOGGER.debug("{}", collection);
@@ -194,8 +193,10 @@ public class HPScreenTargetSelect extends Screen {
         Player t = Minecraft.getInstance().player;
         ResourceLocation hermit = BACKGROUND_SPRITE;
         if(StandPower.getOptional(t).isPresent() && StandPower.get(t).getPowerType() == AddonStands.HERMIT_PURPLE.get()){
+            //HermitPurpleAddon.getLogger().debug("Stand Screen {}",  StandSkinsLoader.getInstance().getSkin(StandPower.get(t)).getTexture(BACKGROUND_SPRITE));
             hermit = StandSkinsLoader.getInstance().getSkin(StandPower.get(t)).getTexture(BACKGROUND_SPRITE);
         }
+        //HermitPurpleAddon.getLogger().debug("Screen {}", hermit);
         guiGraphics.blitSprite(hermit, i, 64, 236, this.windowHeight() + 16);
         guiGraphics.blitSprite(SEARCH_SPRITE, i + 10, 76, 12, 12);
     }

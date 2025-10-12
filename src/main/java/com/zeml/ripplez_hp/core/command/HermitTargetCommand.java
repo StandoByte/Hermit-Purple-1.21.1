@@ -72,8 +72,8 @@ public class HermitTargetCommand {
         int success = 0;
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,1);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET,player.getName().getString());
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(1);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(player.getName().getString());
             success = 1;
         }
         if(success ==0 ){
@@ -91,8 +91,8 @@ public class HermitTargetCommand {
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
             HermitPurpleAddon.LOGGER.debug("String {}", resourceLocation.getKey().location());
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,2);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET,resourceLocation.getKey().location().toString());
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(2);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(resourceLocation.getKey().location().toString());
             success = 1;
         }
         if(success ==0 ){
@@ -110,8 +110,8 @@ public class HermitTargetCommand {
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
             HermitPurpleAddon.LOGGER.debug("String {}", standType.getId() );
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,3);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET, standType.getId().toString());
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(3);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(standType.getId().toString());
             success = 1;
         }
         if(success ==0 ){
@@ -128,8 +128,8 @@ public class HermitTargetCommand {
         int success = 0;
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,4);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET,structure.unwrap().left().get().location().toString());
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(4);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(structure.unwrap().left().get().location().toString());
             success = 1;
         }
         if(success ==0 ){
@@ -147,8 +147,8 @@ public class HermitTargetCommand {
         int success = 0;
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,5);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET,biome.unwrap().left().get().getKey().location().toString());
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(5);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(biome.unwrap().left().get().getKey().location().toString());
             success = 1;
         }
         if(success ==0 ){
@@ -166,8 +166,8 @@ public class HermitTargetCommand {
         int success = 0;
         Entity sourceEntity = source.getEntity();
         if(sourceEntity instanceof LivingEntity){
-            sourceEntity.setData(AddonDataAttachmentTypes.MODE,0);
-            sourceEntity.setData(AddonDataAttachmentTypes.TARGET,"");
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(0);
+            sourceEntity.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget("");
             success = 1;
         }
         if(success ==0 ){

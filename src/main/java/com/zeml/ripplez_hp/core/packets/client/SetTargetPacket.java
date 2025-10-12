@@ -1,19 +1,13 @@
 package com.zeml.ripplez_hp.core.packets.client;
 
-import com.github.standobyte.jojo.core.PacketsRegister;
-import com.github.standobyte.jojo.core.packet.fromserver.TrAimTargetPacket;
-import com.github.standobyte.jojo.powersystem.entityaction.LivingComponentAction;
-import com.github.standobyte.jojo.powersystem.standpower.entity.StandEntity;
-import com.github.standobyte.jojo.util.StandUtil;
-import com.github.standobyte.jojo.util.target.ActionTarget;
 import com.zeml.ripplez_hp.core.HermitPackets;
 import com.zeml.ripplez_hp.init.AddonDataAttachmentTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import org.jetbrains.annotations.NotNull;
 
 public class SetTargetPacket implements CustomPacketPayload {
     private final int mode;
@@ -23,9 +17,6 @@ public class SetTargetPacket implements CustomPacketPayload {
         this.mode = mode;
         this.target = target;
     }
-
-
-
 
 
     private static CustomPacketPayload.Type<SetTargetPacket> type;
@@ -55,14 +46,14 @@ public class SetTargetPacket implements CustomPacketPayload {
         @Override
         public void handle(SetTargetPacket payload, IPayloadContext context) {
             Player player = context.player();
-            player.setData(AddonDataAttachmentTypes.MODE, payload.mode);
-            player.setData(AddonDataAttachmentTypes.TARGET, payload.target);
+            player.getData(AddonDataAttachmentTypes.HERMIT_DATA).setMode(payload.mode);
+            player.getData(AddonDataAttachmentTypes.HERMIT_DATA).setTarget(payload.target);
         }
 
     }
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public @NotNull Type<? extends CustomPacketPayload> type() {
         return type;
     }
 

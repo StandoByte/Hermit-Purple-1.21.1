@@ -45,10 +45,7 @@ public class HermitPurpleLayer<T extends LivingEntity, M extends HumanoidModel<T
         boolean slim = false;
         ResourceLocation hermit = HERMIT;
         if(t instanceof Player){
-            if(isSlimSkin(((Player) t).getGameProfile())){
-                slim = true;
-
-            }
+            slim = isSlimSkin(((Player) t).getGameProfile());
         }
         if(StandPower.getOptional(t).isPresent() && StandPower.get(t).getPowerType() == AddonStands.HERMIT_PURPLE.get() && StandPower.get(t).isSummoned()){
             ResourceLocation texture = StandSkinsLoader.getInstance().getSkin(StandPower.get(t)).getTexture(hermit);
@@ -56,9 +53,6 @@ public class HermitPurpleLayer<T extends LivingEntity, M extends HumanoidModel<T
             HumanoidModel<T> hermitModel = new HumanoidModel<>(slim? Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR) :
                     Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
             parentModel.copyPropertiesTo(hermitModel);
-
-            System.out.println("Resource "+ texture+ slim);
-
             VertexConsumer ivertexbuilder = buffer.getBuffer(RenderType.entityCutoutNoCull(texture));
             hermitModel.renderToBuffer(poseStack,ivertexbuilder,packedLight, OverlayTexture.NO_OVERLAY);
         }

@@ -58,13 +58,13 @@ public class MapDoxingAbility extends EntityActionAbility {
         if(level.isClientSide){
 
         }
-        HermitPurpleAddon.LOGGER.debug("mode {}, target {}", user.getData(AddonDataAttachmentTypes.MODE),user.getData(AddonDataAttachmentTypes.TARGET));
+        HermitPurpleAddon.LOGGER.debug("mode {}, target {}", user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getMode(),user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget());
         byte scale = user.isShiftKeyDown()?(byte) 0: (byte)2;
         BlockPos blockPos = null;
         String target = null;
         ItemStack itemStack = user.getItemInHand(InteractionHand.OFF_HAND);
         if(itemStack.is(Items.MAP)){
-            if(user.getData(AddonDataAttachmentTypes.MODE) < 4){
+            if(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getMode() < 4){
                 Entity entity = DoxingHelper.HPLivingObjectives(user);
                 if(entity != null){
                     blockPos = entity.getOnPos();
@@ -72,10 +72,10 @@ public class MapDoxingAbility extends EntityActionAbility {
 
                 }
             }else {
-                switch (user.getData(AddonDataAttachmentTypes.MODE)){
+                switch (user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getMode()){
                     case 4:
                         blockPos = DoxingHelper.structurePos(user);
-                        String data = user.getData(AddonDataAttachmentTypes.TARGET).split(":")[1];
+                        String data = user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget().split(":")[1];
                         data = data.replace("_"," ");
                         target = data;
 
@@ -84,7 +84,7 @@ public class MapDoxingAbility extends EntityActionAbility {
                         blockPos = DoxingHelper.biomesPos(user);
                         String biome = "biome.";
 
-                        target = Component.translatable(biome.concat(user.getData(AddonDataAttachmentTypes.TARGET).replace(":","."))).getString();
+                        target = Component.translatable(biome.concat(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget().replace(":","."))).getString();
                         break;
                 }
 
@@ -99,7 +99,7 @@ public class MapDoxingAbility extends EntityActionAbility {
                     MapItemSavedData.addTargetDecoration(map,blockPos,"+", MapDecorationTypes.RED_X);
                     String displayName = "filled_map.divination";
                     map.set(DataComponents.ITEM_NAME, Component.translatable(displayName, target));
-                    map.set(DataComponents.MAP_COLOR, new MapItemColor(user.getData(AddonDataAttachmentTypes.COLOR)));
+                    map.set(DataComponents.MAP_COLOR, new MapItemColor(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getColor()));
                     user.setItemInHand(InteractionHand.MAIN_HAND,map);
                 }else {
                     if(ClientGlobals.canHearStands){

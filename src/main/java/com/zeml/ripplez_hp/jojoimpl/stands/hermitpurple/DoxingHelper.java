@@ -39,7 +39,7 @@ public class DoxingHelper {
 
     @Nullable
     public static Entity HPLivingObjectives(@NotNull LivingEntity user){
-        return switch (user.getData(AddonDataAttachmentTypes.MODE)) {
+        return switch (user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getMode()) {
             case 1 -> HPPlayer(user);
             case 2 -> HPEntities(user);
             case 3 -> HPUser(user);
@@ -61,7 +61,7 @@ public class DoxingHelper {
     @Nullable
     private static Player HPPlayer(@NotNull LivingEntity user){
         return user.level().players().stream().map(player -> {
-            if(player.getName().getString().equals(user.getData(AddonDataAttachmentTypes.TARGET))){
+            if(player.getName().getString().equals(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget())){
                 return player;
             }
                     return null;
@@ -75,7 +75,7 @@ public class DoxingHelper {
     private static Entity HPEntities(@NotNull LivingEntity user){
         List<Entity> entities = user.level().getEntitiesOfClass(Entity.class,user.getBoundingBox().inflate(1000),
                 entity ->entity.isAlive() && entity.getType().getDescriptionId().replace("entity.","")
-                        .replace(".",":").equals(user.getData(AddonDataAttachmentTypes.TARGET)));
+                        .replace(".",":").equals(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget()));
         if(!entities.isEmpty()){
             int max = entities.size();
             return entities.get((int) Math.floor(max*Math.random()));
@@ -86,7 +86,7 @@ public class DoxingHelper {
     @Nullable
     private static LivingEntity HPUser(@NotNull LivingEntity user){
         List<LivingEntity> entities = user.level().getEntitiesOfClass(LivingEntity.class, user.getBoundingBox().inflate(1000),
-                entity -> entity.isAlive() &&  StandUtil.isEntityStandUser(entity) && StandPower.get(entity).getPowerType().getId().toString().equals(user.getData(AddonDataAttachmentTypes.TARGET)));
+                entity -> entity.isAlive() &&  StandUtil.isEntityStandUser(entity) && StandPower.get(entity).getPowerType().getId().toString().equals(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget()));
         if(!entities.isEmpty()){
             return entities.stream().findAny().orElse(null);
         }
@@ -97,7 +97,7 @@ public class DoxingHelper {
     public static BlockPos biomesPos(@NotNull LivingEntity user){
         Pair<BlockPos, Holder<Biome>> pair = ((ServerLevel) user.level()).getChunkSource().getGenerator().getBiomeSource()
                 .findClosestBiome3d(user.getOnPos(),3000,8,8,
-                        biomeHolder -> biomeHolder.getRegisteredName().toString().equals(user.getData(AddonDataAttachmentTypes.TARGET)),
+                        biomeHolder -> biomeHolder.getRegisteredName().toString().equals(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget()),
                         ((ServerLevel) user.level()).getChunkSource().randomState().sampler(),user.level()
                         );
         if(pair != null){
@@ -110,7 +110,7 @@ public class DoxingHelper {
     public static BlockPos structurePos(@NotNull LivingEntity user){
         ServerLevel level = (ServerLevel) user.level();
         Registry<Structure> structures = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        Optional<Holder.Reference<Structure>> structureHolder = structures.getHolder(structures.getId(ResourceLocation.tryParse(user.getData(AddonDataAttachmentTypes.TARGET))));
+        Optional<Holder.Reference<Structure>> structureHolder = structures.getHolder(structures.getId(ResourceLocation.tryParse(user.getData(AddonDataAttachmentTypes.HERMIT_DATA).getTarget())));
         HermitPurpleAddon.LOGGER.debug("Pair {}", structureHolder);
         if(structureHolder.isPresent()){
             HolderSet<Structure> holderSet = HolderSet.direct(structureHolder.get());

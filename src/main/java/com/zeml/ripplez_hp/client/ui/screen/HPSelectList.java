@@ -19,6 +19,7 @@ public class HPSelectList extends ContainerObjectSelectionList<HPSelectList.Herm
     private final Minecraft minecraft;
     private List<Object> originalList;
     private String filterText = "";
+    private int mode = 0;
     public HPSelectList(Minecraft minecraft, int width, int height, int y, int itemHeight) {
         super(minecraft, width, height, y, itemHeight);
         this.minecraft = minecraft;
@@ -43,6 +44,14 @@ public class HPSelectList extends ContainerObjectSelectionList<HPSelectList.Herm
     public void setFilter(String filter) {
         this.filterText = filter.toLowerCase();
 
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public int getMode() {
+        return this.mode;
     }
 
     public boolean isEmpty() {
