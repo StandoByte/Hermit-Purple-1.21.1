@@ -1,5 +1,7 @@
 package com.zeml.ripplez_hp.core;
 
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
 import com.zeml.ripplez_hp.init.*;
 import com.zeml.ripplez_hp.init.power.AddonPlayerPowers;
@@ -11,8 +13,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import org.slf4j.Logger;
 
 @Mod(HermitPurpleAddon.MOD_ID)
 public class HermitPurpleAddon {
@@ -20,6 +22,8 @@ public class HermitPurpleAddon {
     @Deprecated
     public static final Logger LOGGER = LogUtils.getLogger();
     public HermitPurpleAddon(IEventBus modEventBus, ModContainer modContainer) {
+        modEventBus.register(this);
+
         AddonPlayerPowers.PLAYER_POWERS.register(modEventBus);
         AddonStandAbilities.load();
         AddonStandEffects.STAND_EFFECT_TYPES.register(modEventBus);
@@ -31,6 +35,10 @@ public class HermitPurpleAddon {
         AddonItems.ITEMS.register(modEventBus);
         AddonSoundEvents.SOUNDS.register(modEventBus);
         HermitDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
+    }
+
+    @SubscribeEvent
+    private void commonSetup(FMLCommonSetupEvent event) {
     }
 
     @SubscribeEvent

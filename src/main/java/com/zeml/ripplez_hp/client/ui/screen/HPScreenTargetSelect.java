@@ -165,7 +165,7 @@ public class HPScreenTargetSelect extends Screen {
                     this.hpSelectList.setMode(4);
                     this.structuresButton.setMessage(TAB_STRUCTURES_SELECTED);
                     HermitPurpleAddon.getLogger().debug("Structures {}", minecraft.player.getData(AddonDataAttachmentTypes.HERMIT_DATA).getStructures());
-                    collection = Collections.EMPTY_LIST;
+                    collection = minecraft.player.getData(AddonDataAttachmentTypes.HERMIT_DATA).getStructures();
                 }
                 case ENTITIES -> {
                     this.hpSelectList.setMode(2);

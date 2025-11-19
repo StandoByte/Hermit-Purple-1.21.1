@@ -9,7 +9,9 @@ import com.github.standobyte.jojo.powersystem.ability.AbilityType;
 import com.github.standobyte.jojo.powersystem.ability.EntityActionAbility;
 import com.github.standobyte.jojo.powersystem.ability.condition.ConditionCheck;
 import com.github.standobyte.jojo.powersystem.ability.controls.InputMethod;
+import com.github.standobyte.jojo.powersystem.entityaction.ActionAnimIdentifier;
 import com.github.standobyte.jojo.powersystem.entityaction.ActionPhase;
+import com.github.standobyte.jojo.powersystem.entityaction.EntityActionInstance;
 import com.github.standobyte.jojo.powersystem.entityaction.HeldInput;
 import com.github.standobyte.jojo.powersystem.standpower.StandPower;
 import com.github.standobyte.jojo.powersystem.standpower.entity.StandEntityAbility;
@@ -23,6 +25,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -40,7 +43,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 public class MapDoxingAbility extends EntityActionAbility {
     public MapDoxingAbility(AbilityType<?> abilityType, AbilityId abilityId) {
         super(abilityType, abilityId);
-        setDefaultPhaseLength(ActionPhase.WINDUP,5);
+        setDefaultPhaseLength(ActionPhase.WINDUP,10);
     }
 
     @Override
@@ -121,6 +124,8 @@ public class MapDoxingAbility extends EntityActionAbility {
     }
 
 
-
-
+    @Override
+    public ActionAnimIdentifier getEntityAnim(EntityActionInstance action) {
+        return super.getEntityAnim(action);
+    }
 }
