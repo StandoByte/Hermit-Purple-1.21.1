@@ -9,6 +9,7 @@ import com.zeml.ripplez_hp.client.ui.screen.HPScreenTargetSelect;
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.core.packets.server.HermitTargetDataPacket;
 import com.zeml.ripplez_hp.init.AddonDataAttachmentTypes;
+import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.client.HermitTargetScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -33,7 +34,7 @@ public class OpenTargetAbility extends EntityActionAbility {
         }
         if(level.isClientSide){
             Minecraft minecraft = Minecraft.getInstance();
-            minecraft.setScreen(new HPScreenTargetSelect());
+            minecraft.setScreen(new HermitTargetScreen());
         }
         return super.onKeyPress(level, user, extraClientInput, inputMethod, clickHoldResolveTime);
     }
