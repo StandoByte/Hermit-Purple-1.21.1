@@ -1,8 +1,6 @@
 package com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.client;
 
 import com.github.standobyte.jojo.core.JojoRegistries;
-import com.zeml.ripplez_hp.client.ui.screen.HPScreenTargetSelect;
-import com.zeml.ripplez_hp.client.ui.screen.HPSelectList;
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.core.packets.client.SetTargetPacket;
 import com.zeml.ripplez_hp.init.AddonDataAttachmentTypes;
@@ -129,6 +127,7 @@ public class HermitTargetScreen extends Screen {
         this.searchBox.setValue(s);
         this.searchBox.setResponder(this::checkSearchStringUpdate);
         this.addRenderableWidget(this.searchBox);
+        this.showPage(this.page);
     }
 
     @Override
@@ -249,6 +248,13 @@ public class HermitTargetScreen extends Screen {
             this.lastSearch = newText;
             this.showPage(this.page);
         }
+    }
+
+    @Override
+    public void resize(Minecraft minecraft, int width, int height) {
+        String searchString = this.searchBox.getValue();
+        this.init(minecraft, width, height);
+        this.searchBox.setValue(searchString);
     }
 
     @OnlyIn(Dist.CLIENT)
