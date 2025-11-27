@@ -1,11 +1,17 @@
 {
   "stand.ripplez_hp.hermit_purple": "Hermit Purple",
+  "stand.ripplez_hp.hermit_purple.desc": "A power-type vine like Stand, Its main power consist of gathering information, due this it doesn't have good combat capabilities but they can be enhanced if the stand is infused with hamon",
   "stand.ripplez_hp.emperor": "Emperor",
+  "stand.ripplez_hp.emperor.desc": "An Gun Item power-type Stand, It can shoot bullets those follow your targets in a close range, it's not that good by itself so maybe you should search an ally",
 
   "item.ripplez_hp.emperor": "Emperor",
 
   "entity.ripplez_hp.emperor_bullet": "Emperor Bullet",
 
+  "jojo_ripples.skill.hp_vine": "Vine Whip",
+  "jojo_ripples.ability.hp_vine": "Vine Whip",
+  "jojo_ripples.skill.hp_vine.desc": "Use hermit purple as a whip to attack your enemies, you can infuse it hamon if you have learned hamon infusion",
+  "jojo_ripples.skill.hp_vine.controls": "\uEAFD",
   "jojo_ripples.skill.cringe": "Oh no Cringe!",
   "jojo_ripples.ability.cringe": "\"Oh no, Cringe!\"",
   "jojo_ripples.skill.cringe.desc": "Deal emotional damage to your opponent",

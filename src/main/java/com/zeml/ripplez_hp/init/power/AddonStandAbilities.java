@@ -8,14 +8,14 @@ import com.zeml.ripplez_hp.jojoimpl.stands.emperor.DeleteStandTargetAbility;
 import com.zeml.ripplez_hp.jojoimpl.stands.emperor.StandTargetAbility;
 import com.zeml.ripplez_hp.jojoimpl.stands.emperor.TargetDSelectAbility;
 import com.zeml.ripplez_hp.jojoimpl.stands.emperor.TargetSelectAbility;
-import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.HermitAction;
-import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.MapDoxingAbility;
-import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.OhNoCringeAbility;
-import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.OpenTargetAbility;
+import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public final class AddonStandAbilities {
 	public static void load() {}
+
+	public static final DeferredHolder<AbilityType<?>,AbilityType<HermitVineWhip>> VINE = ABILITY_TYPES.register(
+			"vine",key ->new AbilityType<>(key,HermitVineWhip::new));
 
 	public static final DeferredHolder<AbilityType<?>, AbilityType<OhNoCringeAbility>> CRINGE = ABILITY_TYPES.register(
 			"cringe", key -> new AbilityType<>(key, OhNoCringeAbility::new));

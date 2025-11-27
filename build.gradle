@@ -86,7 +86,7 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation(files("jars/RipplesOfThePast-NeoForge-1.21.1-0.alpha-251118-b.jar"))
+    implementation(files("jars/RipplesOfThePast-NeoForge-1.21.1-0.4-251124-b.jar"))
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

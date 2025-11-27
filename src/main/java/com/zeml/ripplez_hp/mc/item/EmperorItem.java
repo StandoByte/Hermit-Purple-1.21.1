@@ -8,6 +8,7 @@ import com.github.standobyte.jojo.init.ModStatusEffects;
 import com.github.standobyte.jojo.powersystem.standpower.StandPower;
 import com.github.standobyte.jojo.powersystem.standpower.entity.StandEntity;
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
+import com.zeml.ripplez_hp.core.packets.server.StandSoundPacket;
 import com.zeml.ripplez_hp.init.AddonSoundEvents;
 import com.zeml.ripplez_hp.init.HermitDataComponents;
 import com.zeml.ripplez_hp.jojoimpl.stands.emperor.EmperorBulletEntity;
@@ -145,7 +146,7 @@ public class EmperorItem extends Item {
                     emperorBullet.shootFromRotation(shooter,1F,1F);
                     level.addFreshEntity(emperorBullet);
                     power.consumeStamina(35*multStamina);
-                    PacketDistributor.sendToPlayersTrackingEntityAndSelf(user, StandSkinSoundPacket.play(shooter.position(),AddonSoundEvents.EMP_SHOT, power,shooter.getSoundSource(),1,1));
+                    PacketDistributor.sendToPlayersTrackingEntityAndSelf(user, new StandSoundPacket(user.getId(),AddonSoundEvents.EMP_SHOT,true,1,1));
                     return true;
                 }
             }

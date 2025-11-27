@@ -2,6 +2,7 @@ package com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple;
 
 import com.github.standobyte.jojo.powersystem.ability.AbilityId;
 import com.github.standobyte.jojo.powersystem.ability.AbilityType;
+import com.github.standobyte.jojo.powersystem.ability.AbilityUsageGroup;
 import com.github.standobyte.jojo.powersystem.ability.EntityActionAbility;
 import com.github.standobyte.jojo.powersystem.ability.controls.InputMethod;
 import com.github.standobyte.jojo.powersystem.entityaction.HeldInput;
@@ -21,6 +22,8 @@ public class OpenTargetAbility extends EntityActionAbility {
 
     public OpenTargetAbility(AbilityType<?> abilityType, AbilityId abilityId) {
         super(abilityType, abilityId);
+        usageGroup = AbilityUsageGroup.UTILITY;
+
     }
 
     @Override

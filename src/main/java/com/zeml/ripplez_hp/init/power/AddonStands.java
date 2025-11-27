@@ -11,15 +11,16 @@ import com.github.standobyte.jojo.powersystem.standpower.type.StandType;
 
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.powersystem.standpower.type.EmperorType;
+import com.zeml.ripplez_hp.powersystem.standpower.type.HermitPurpleType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class AddonStands {
 	public static final DeferredRegister<StandType> STANDS = DeferredRegister.create(JojoRegistries.DEFAULT_STANDS_REG, HermitPurpleAddon.MOD_ID);
 	
-	public static final DeferredHolder<StandType, StandType> HERMIT_PURPLE = STANDS.register(
+	public static final DeferredHolder<StandType, HermitPurpleType> HERMIT_PURPLE = STANDS.register(
 			"hermit_purple", id ->
-			new StandType(
+			new HermitPurpleType(
 					new StandStats.Builder()
 					.power(6)
 					.speed(10)
@@ -29,6 +30,10 @@ public class AddonStands {
 					.build(),
 
 					new MovesetBuilder()
+
+					.addAbility("hp_vine",AddonStandAbilities.VINE).withBind(InputMethod.CLICK,InputKey.LMB)
+					.addAbility("hp_vine2",AddonStandAbilities.VINE, vine->vine.isSubAbility = true)
+					.addAbility("hp_vine3",AddonStandAbilities.VINE, vine->vine.isSubAbility = true)
 
 					.makeHotbar(0, InputKey.X, InputKey.C)
 					
@@ -45,10 +50,11 @@ public class AddonStands {
 					.addAbility("cringe", AddonStandAbilities.CRINGE)
 					.inHotbar(0, InputMethod.CLICK)
 
+							.addSkill(StandUnlockableSkill.startingAbility("hp_vine"))
 							.addSkill(StandUnlockableSkill.startingAbility("hp_doxx"))
 							.addSkill(StandUnlockableSkill.unlockableAbility("hp_target",1))
 							.addSkill(StandUnlockableSkill.unlockableAbility("hp_block",1))
-							.addSkill(StandUnlockableSkill.startingAbility("cringe"))
+							.addSkill(StandUnlockableSkill.unlockableAbility("cringe",2))
 
 
 					, id));

@@ -6,6 +6,7 @@ import com.github.standobyte.jojo.client.sound.sounds.EntityLingeringSoundInstan
 import com.github.standobyte.jojo.powersystem.Power;
 import com.github.standobyte.jojo.powersystem.ability.AbilityId;
 import com.github.standobyte.jojo.powersystem.ability.AbilityType;
+import com.github.standobyte.jojo.powersystem.ability.AbilityUsageGroup;
 import com.github.standobyte.jojo.powersystem.ability.EntityActionAbility;
 import com.github.standobyte.jojo.powersystem.ability.condition.ConditionCheck;
 import com.github.standobyte.jojo.powersystem.ability.controls.InputMethod;
@@ -30,6 +31,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -42,10 +44,11 @@ import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class MapDoxingAbility extends EntityActionAbility {
+public class MapDoxingAbility extends HermitAction {
     public MapDoxingAbility(AbilityType<?> abilityType, AbilityId abilityId) {
         super(abilityType, abilityId);
-        setDefaultPhaseLength(ActionPhase.WINDUP,10);
+        usageGroup = AbilityUsageGroup.UTILITY;
+        setDefaultPhaseLength(ActionPhase.WINDUP,20);
     }
 
     @Override
@@ -116,7 +119,9 @@ public class MapDoxingAbility extends EntityActionAbility {
 
     @Override
     public ActionAnimIdentifier getEntityAnim(EntityActionInstance action) {
-        HermitPurpleAddon.getLogger().debug("Anim {}", super.getEntityAnim(action).toString());
+        if(action.getPowerUser() instanceof  LivingEntity livingEntity && livingEntity.getMainArm() == HumanoidArm.LEFT){
+            return ActionAnimIdentifier.getOrCreate(abilityId.nameInMoveset().concat("_l"),false);
+        }
         return super.getEntityAnim(action);
     }
 }

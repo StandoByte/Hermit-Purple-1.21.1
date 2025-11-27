@@ -2,17 +2,17 @@
   "stand_summon": {
     "replace": true,
     "sounds": [
-      "ripplez_hp:hermit_purple/spiderman_summon_1",
-      "ripplez_hp:hermit_purple/spiderman_summon_2",
-      "ripplez_hp:hermit_purple/spiderman_summon_3"
+      "ripplez_hp:hermit_purple/spider_man/spiderman_summon_1",
+      "ripplez_hp:hermit_purple/spider_man/spiderman_summon_2",
+      "ripplez_hp:hermit_purple/spider_man/spiderman_summon_3"
     ]
   },
   "stand_unsummon": {
     "replace": true,
     "sounds": [
-      "ripplez_hp:hermit_purple/spiderman_unsummon",
-      "ripplez_hp:hermit_purple/spiderman_unsummon_2",
-      "ripplez_hp:hermit_purple/spiderman_unsummon_3"
+      "ripplez_hp:hermit_purple/spider_man/spiderman_unsummon",
+      "ripplez_hp:hermit_purple/spider_man/spiderman_unsummon_2",
+      "ripplez_hp:hermit_purple/spider_man/spiderman_unsummon_3"
     ]
   }
 }
