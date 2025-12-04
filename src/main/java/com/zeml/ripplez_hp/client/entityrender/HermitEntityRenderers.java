@@ -1,10 +1,10 @@
 package com.zeml.ripplez_hp.client.entityrender;
 
 import com.zeml.ripplez_hp.core.HermitPurpleAddon;
-import com.zeml.ripplez_hp.client.entityrender.hermit.HermitPurpleLayer;
-import com.zeml.ripplez_hp.client.entityrender.hermit.HermitPurpleOuterLayer;
 import com.zeml.ripplez_hp.init.AddonEntityTypes;
 import com.zeml.ripplez_hp.jojoimpl.stands.emperor.client.EmperorBulletRenderer;
+import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.client.renderer.HermitPurpleVinesLayer;
+import com.zeml.ripplez_hp.jojoimpl.stands.hermitpurple.client.renderer.HermitPurpleLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -38,6 +38,8 @@ public class HermitEntityRenderers {
 
     private static <T extends LivingEntity, M extends HumanoidModel<T>> void addHumanoidLayers(LivingEntityRenderer<T, M> renderer) {
         renderer.addLayer(new HermitPurpleLayer<>(renderer));
-        renderer.addLayer(new HermitPurpleOuterLayer<>(renderer));
+        renderer.addLayer(new HermitPurpleVinesLayer<>(renderer));
     }
+
+
 }

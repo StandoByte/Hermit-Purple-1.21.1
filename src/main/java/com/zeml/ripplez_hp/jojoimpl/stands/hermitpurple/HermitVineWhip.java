@@ -55,18 +55,17 @@ public class HermitVineWhip extends HermitAction{
     protected Ability getVineCombo(LivingEntity livingEntity, Moveset moveset){
         int startFromVine = 0;
         AbilityId curAbility = LivingComponentAction.getComponent(livingEntity).comboString.getLast();
-
+        int size = punchNames.size();
         if (curAbility != null) {
-            HermitPurpleAddon.getLogger().debug("Ability {},", curAbility.nameInMoveset());
             String actionName = curAbility.nameInMoveset();
-            for (int i = 0; i < punchNames.size(); i++) {
+            for (int i = 0; i < size; i++) {
                 if (punchNames.get(i).equals(actionName)) {
                     startFromVine = i + 1;
                     break;
                 }
             }
         }
-        int size = punchNames.size();
+
         for (int i = 0; i < size; i++) {
             int index = (startFromVine + i) % size;
             String nextPunchName = punchNames.get(index);

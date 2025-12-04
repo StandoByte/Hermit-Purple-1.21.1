@@ -74,6 +74,7 @@ public abstract class HPStandSkinsScreenMixin  {
         renderManager.setRenderShadow(false);
 
 
+
         Zombie zombie = new Zombie(Minecraft.getInstance().level);
 
         StandPower.getOptional(zombie).ifPresent(standPower -> {

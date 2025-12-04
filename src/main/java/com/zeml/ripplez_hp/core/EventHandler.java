@@ -16,6 +16,6 @@ public class EventHandler {
     public static void registerCommands(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         CommandBuildContext context = event.getBuildContext();
-        HermitTargetCommand.register(dispatcher, context);
+        //HermitTargetCommand.register(dispatcher, context);
     }
 }

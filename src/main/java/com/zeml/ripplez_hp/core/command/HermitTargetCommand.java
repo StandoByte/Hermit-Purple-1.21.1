@@ -31,6 +31,7 @@ public class HermitTargetCommand {
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_304258_) -> {
         return Component.translatableEscape("commands.locate.structure.invalid", new Object[]{p_304258_});
     });
+    /*
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context){
         dispatcher.register(
                 Commands.literal("hermit").requires(src -> src.hasPermission(0))
@@ -65,9 +66,9 @@ public class HermitTargetCommand {
                                 .executes(ctx->setTargetRandom(ctx.getSource()))
                         )
         );
-        JojoCommandsCommand.addCommand("hermit");
+        //JojoCommandsCommand.addCommand("hermit");
     }
-
+*/
     private static int setPlayerTarget(CommandSourceStack source, Entity player) throws CommandSyntaxException {
         int success = 0;
         Entity sourceEntity = source.getEntity();
