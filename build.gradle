@@ -38,24 +38,31 @@ neoForge {
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
-        client {
+        client_HermitPurple {
             client()
 
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        server {
+        client2_HermitPurple {
+            client()
+
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            programArguments.addAll '--username=Dev2'
+        }
+
+        server_HermitPurple {
             server()
 
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        gameTestServer {
+        gameTestServer_HermitPurple {
             type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        data {
+        data_HermitPurple {
             data()
 
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
