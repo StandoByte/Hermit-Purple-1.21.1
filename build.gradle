@@ -15,6 +15,10 @@ group = mod_group_id
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        name "RotP Maven"
+        url 'https://raw.githubusercontent.com/StandoByte/RotP-maven/1.21.1'
+    }
 }
 
 base {
@@ -34,24 +38,31 @@ neoForge {
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
-        client {
+        client_HermitPurple {
             client()
 
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        server {
+        client2_HermitPurple {
+            client()
+
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            programArguments.addAll '--username=Dev2'
+        }
+
+        server_HermitPurple {
             server()
 
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        gameTestServer {
+        gameTestServer_HermitPurple {
             type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        data {
+        data_HermitPurple {
             data()
 
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
@@ -86,7 +97,8 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation(files("jars/RipplesOfThePast-NeoForge-1.21.1-0.4-251128-b.jar"))
+    implementation "standobyte.jojo:RipplesOfThePast-NeoForge:${main_mod_version}"
+    compileOnly 'team.unnamed:mocha:3.0.1'
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
