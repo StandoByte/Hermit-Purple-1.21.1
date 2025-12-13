@@ -15,14 +15,12 @@ import com.zeml.ripplez_hp.core.HermitPurpleAddon;
 import com.zeml.ripplez_hp.init.power.AddonStands;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,15 +45,14 @@ public class HermitPurpleLayer<T extends LivingEntity, M extends HumanoidModel<T
         if(standData != null && standData.getPowerType() == AddonStands.HERMIT_PURPLE.get() && standData.isSummoned()){
             boolean slim = ModelUtil.isSlimModel(t);
             StandSkin standSkin = StandSkinsLoader.getInstance().getSkin(standData);
-            ResourceLocation texture = standSkin.getTexture(HERMIT);
             M parentModel = getParentModel();
             HermitPurpleModel purpleModel = this.purpleModel.getModel(standSkin);
             
-            purpleModel = new HermitPurpleModel(RotpGeckoModelLoader.getInstance().getModelDefinition(HermitPurpleAddon.resLoc("hermit_base")).bakeRoot());
-            
+            purpleModel.setAllVisible(true);
             parentModel.copyPropertiesTo(purpleModel);
             purpleModel.setSlim(slim);
-            purpleModel.poseLayer(parentModel);
+
+            ResourceLocation texture = standSkin.getTexture(HERMIT);
             VertexConsumer ivertexbuilder = buffer.getBuffer(RenderType.entityCutoutNoCull(texture));
             purpleModel.renderToBuffer(poseStack,ivertexbuilder,packedLight, OverlayTexture.NO_OVERLAY);
 
@@ -70,12 +67,11 @@ public class HermitPurpleLayer<T extends LivingEntity, M extends HumanoidModel<T
     @Override
     public void renderHandFirstPerson(HumanoidArm humanoidArm, PoseStack poseStack, MultiBufferSource buffer, int packedLight, LivingEntity t, LivingEntityRenderer<?, ?> livingEntityRenderer) {
 
-        boolean slim = t instanceof AbstractClientPlayer player && player.getSkin().model() == PlayerSkin.Model.SLIM;
-        ResourceLocation hermit = HERMIT;
+        boolean slim = ModelUtil.isSlimModel(t);
         StandPower standData = StandPower.get(t);
         if(standData != null && standData.getPowerType() == AddonStands.HERMIT_PURPLE.get() && standData.isSummoned()) {
             StandSkin standSkin = StandSkinsLoader.getInstance().getSkin(standData);
-            ResourceLocation texture = standSkin.getTexture(hermit);
+            ResourceLocation texture = standSkin.getTexture(HERMIT);
             HermitPurpleModel purpleModel = (HermitPurpleModel) this.purpleModel.getModel(standSkin);
             purpleModel.setAllVisible(true);
             purpleModel.setSlim(slim);
@@ -84,13 +80,13 @@ public class HermitPurpleLayer<T extends LivingEntity, M extends HumanoidModel<T
             purpleModel.rightLeg.visible = false;
             purpleModel.leftLeg.visible = false;
             purpleModel.hat.visible = false;
-            purpleModel.poseLayer(getParentModel());
+            getParentModel().copyPropertiesTo(purpleModel);
             ModelPart arm = FirstPersonModelLayer.getArm(purpleModel, humanoidArm);
             VertexConsumer iVertexBuilder = buffer.getBuffer(RenderType.entityCutoutNoCull(texture));
             arm.xRot = 0.0F;
             arm.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
             ModelPart armSlim = humanoidArm == HumanoidArm.LEFT ? purpleModel.leftArmSlim : purpleModel.rightArmSlim;
-            armSlim.xRot = 0.0F;
+            armSlim.copyFrom(arm);
             armSlim.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
             arm.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
         }
